@@ -8,4 +8,4 @@
 /httpRequests/
 
 # My New gitignore
-\.idea
+.idea/
