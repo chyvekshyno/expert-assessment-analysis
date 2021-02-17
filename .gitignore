@@ -9,3 +9,5 @@
 
 # My New gitignore
 .idea/
+__*
+
