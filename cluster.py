@@ -6,16 +6,19 @@ import numpy as np
 class SimpleNPCluster:
     """A simple class describes cluster using numpy"""
 
-    def __init__(self):
+    def __init__(self, names: List[str], data: List[np.ndarray]):
+        self.names = []
+        for name in names:
+            self.names.append(name)
         self.values = []
-
-    def __init__(self, a: List[np.ndarray]):
-        self.values = []
-        for o in a:
+        for o in data:
             self.values.append(o)
 
-    def tolist(self):
+    def data(self) -> List[np.ndarray]:
         return self.values
+
+    def allnames(self) -> List[str]:
+        return self.names
 
     def vshape(self):
         return self.values[0].shape
@@ -33,8 +36,13 @@ class SimpleNPCluster:
 
 
 def combine(*clusters: SimpleNPCluster) -> SimpleNPCluster:
-    allvalues: List[np.ndarray] = []
+    # combine data
+    names = []
+    data = []
     for cluster in clusters:
-        for o in cluster.tolist():
-            allvalues.append(o)
-    return SimpleNPCluster(allvalues)
+        for o in cluster.data():
+            data.append(o)
+        for name in cluster.allnames():
+            names.append(name)
+
+    return SimpleNPCluster(names, data)

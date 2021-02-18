@@ -47,8 +47,8 @@ if __name__ == '__main__':
 
     # import into clusters
     expert_clusters = []
-    for expert in expert_assessment:
-        expert_clusters.append(npcluster([expert]))
+    for i in range(expert_assessment.shape[0]):
+        expert_clusters.append(npcluster([str(i)], [expert_assessment[i]]))
 
     # find first distance matrix
     distM = distance_matrix(expert_clusters)
