@@ -1,9 +1,7 @@
-import numpy as np
 from utils import *
-from cluster import SimpleNPCluster as npcluster , combine
+from cluster import SimpleNPCluster as npcluster, combine
 
 if __name__ == '__main__':
-    #
     # init parameters
     expert_assessment = np.array([
         [  # expert_1
@@ -42,13 +40,13 @@ if __name__ == '__main__':
             [0.276, 0.322, 0.402],  # param_1
             [0.530, 0.217, 0.253],  # param_2
             [0.198, 0.389, 0.413]  # param_3
-        ],
+        ]
     ])
 
     # import into clusters
-    expert_clusters = []
+    expert_clusters = np.array([], dtype=npcluster)
     for i in range(expert_assessment.shape[0]):
-        expert_clusters.append(npcluster([str(i)], [expert_assessment[i]]))
+        expert_clusters = np.insert(expert_clusters, len(expert_clusters), [npcluster([str(i)], [expert_assessment[i]])])
 
     # find first distance matrix
     distM = distance_matrix(expert_clusters)
@@ -57,11 +55,12 @@ if __name__ == '__main__':
     distSUM = symmetric_matrix_dim_sums(distM)
     trustRadius = trust_radius(distM)
 
-    # do cluster analysis
-    c1, c2 = find_cluster(distM)
-    cnew = combine(expert_clusters[c1], expert_clusters[c2])
-    # #####################
-    # write steps in file
+    # clustering
+    for i in range(5):
+        c1, c2 = find_cluster(distM)
+        cnew = combine(expert_clusters[c1], expert_clusters[c2])
+        expert_clusters = np.insert(np.delete(expert_clusters, [c1, c2]), 0, [cnew])
+        distM = distance_matrix(expert_clusters)
 
     print("Pause")  # temporary for breakpoint
     pass

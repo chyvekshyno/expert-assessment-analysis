@@ -16,7 +16,7 @@ def distance(cl1: npcluster, cl2: npcluster) -> float:
     return res
 
 
-def distance_matrix(morph_table: List[npcluster]) -> np.ndarray:
+def distance_matrix(morph_table: np.ndarray) -> np.ndarray:
     """
     calculate matrix if distances between clusters
     :param morph_table: list of SimpleNPCluster s
