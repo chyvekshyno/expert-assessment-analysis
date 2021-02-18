@@ -1,7 +1,6 @@
-from typing import List
-
-import utils
 import numpy as np
+from utils import *
+from cluster import SimpleNPCluster as npcluster , combine
 
 if __name__ == '__main__':
     #
@@ -46,8 +45,23 @@ if __name__ == '__main__':
         ],
     ])
 
+    # import into clusters
+    expert_clusters = []
+    for expert in expert_assessment:
+        expert_clusters.append(npcluster([expert]))
+
     # find first distance matrix
+    distM = distance_matrix(expert_clusters)
+
+    # trust radius
+    distSUM = symmetric_matrix_dim_sums(distM)
+    trustRadius = trust_radius(distM)
+
     # do cluster analysis
+    c1, c2 = find_cluster(distM)
+    cnew = combine(expert_clusters[c1], expert_clusters[c2])
     # #####################
     # write steps in file
+
+    print("Pause")  # temporary for breakpoint
     pass

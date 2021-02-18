@@ -17,11 +17,16 @@ def distance(cl1: npcluster, cl2: npcluster) -> float:
 
 
 def distance_matrix(morph_table: List[npcluster]) -> np.ndarray:
+    """
+    calculate matrix if distances between clusters
+    :param morph_table: list of SimpleNPCluster s
+    :return: np.array (dim=2)
+    """
     mdim = len(morph_table)
     res = np.ndarray(shape=(mdim, mdim)
                      , dtype=float)
     for i in range(mdim):
-        res[i][i] = 0.
+        res[i][i] = float('nan')
         for j in range(i + 1, mdim):
             dist = distance(morph_table[i], morph_table[j])
             res[i][j] = dist
@@ -29,31 +34,29 @@ def distance_matrix(morph_table: List[npcluster]) -> np.ndarray:
     return res
 
 
-def distance_sums(matrix: np.ndarray) -> np.ndarray:
-    return np.sum(matrix, axis=0).squeeze()
+def symmetric_matrix_dim_sums(matrix: np.ndarray) -> np.ndarray:
+    return np.nansum(matrix, axis=0).squeeze()
 
 
 def argmediana(matrix: np.ndarray) -> int:
-    res = np.argmin(distance_sums(matrix)).squeeze()[0]
-    return res
+    """
+    :return: column number with min value
+    """
+    res = np.nanargmin(symmetric_matrix_dim_sums(matrix))
+    return res.take(0)
 
 
 def trust_radius(matrix: np.ndarray) -> int:
     mediana = matrix[argmediana(matrix)]
-    trust_count = matrix.shape[0] / 2
-    trust_ind = np.argsort(mediana)[:trust_count + 1]  # +1 cause of diagonal zero
-    np.delete(np.min(trust_ind))  # delete index of diagonal zero
-    res = abs(mediana[np.max(trust_ind)] - mediana[np.min(trust_ind)])
+    trust_count = matrix.shape[0] // 2
+    trust_ind = np.argsort(mediana)[:trust_count]
+    # trust_ind = np.delete(trust_ind, 0)  # delete index of diagonal zero
+    res = mediana[trust_ind[-1]] - mediana[trust_ind[0]]
     return res
 
 
 def find_cluster(matrix: np.ndarray) -> Tuple[int, int]:
-    flat_index = np.argmin(matrix)
+    flat_index = np.nanargmin(matrix)
     npcoord = np.unravel_index(flat_index, matrix.shape)
     coord = npcoord[0].take(0), npcoord[1].take(0)
     return coord
-
-
-def create_cluster(morph_table: List[npcluster], indecies: Tuple[int, int]) -> npcluster:
-    return npcluster(morph_table[indecies[0]].tolist()
-                     .append(morph_table[indecies[1]].tolist()))

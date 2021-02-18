@@ -10,7 +10,7 @@ class SimpleNPCluster:
         self.values = []
 
     def __init__(self, a: List[np.ndarray]):
-        self.__init__()
+        self.values = []
         for o in a:
             self.values.append(o)
 
