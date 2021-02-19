@@ -50,7 +50,6 @@ def trust_radius(matrix: np.ndarray) -> int:
     mediana = matrix[argmediana(matrix)]
     trust_count = matrix.shape[0] // 2
     trust_ind = np.argsort(mediana)[:trust_count]
-    # trust_ind = np.delete(trust_ind, 0)  # delete index of diagonal zero
     res = mediana[trust_ind[-1]] - mediana[trust_ind[0]]
     return res
 

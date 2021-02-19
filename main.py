@@ -1,5 +1,11 @@
+import os
+
 from utils import *
 from cluster import SimpleNPCluster as npcluster, combine
+
+file_name = "f.txt"
+dir_path = "out"
+comp_path = os.path.join(dir_path, file_name)
 
 if __name__ == '__main__':
     # init parameters
@@ -46,21 +52,51 @@ if __name__ == '__main__':
     # import into clusters
     expert_clusters = np.array([], dtype=npcluster)
     for i in range(expert_assessment.shape[0]):
-        expert_clusters = np.insert(expert_clusters, len(expert_clusters), [npcluster([str(i)], [expert_assessment[i]])])
+        expert_clusters = np.insert(expert_clusters,
+                                    len(expert_clusters),
+                                    [npcluster([str(i)], [expert_assessment[i]])])
 
     # find first distance matrix
     distM = distance_matrix(expert_clusters)
+    with open(comp_path, 'w') as f:
+        f.write("\nDistance Matrix: \n"
+                + "\n".join(" \t\t".join(map(str, o))
+                            for o in np.around(distM, 3)))
 
     # trust radius
     distSUM = symmetric_matrix_dim_sums(distM)
+    mediana = argmediana(distM)
     trustRadius = trust_radius(distM)
+
+    with open(comp_path, 'a') as f:
+        f.write("\nDistance SUMS: \n"
+                + str(np.around(distSUM, 3))
+                + "\nMediana Index: "
+                + str(mediana)
+                + "\nTrust Radius: "
+                + str(round(trustRadius, 4)))
 
     # clustering
     for i in range(5):
-        c1, c2 = find_cluster(distM)
-        cnew = combine(expert_clusters[c1], expert_clusters[c2])
-        expert_clusters = np.insert(np.delete(expert_clusters, [c1, c2]), 0, [cnew])
+        cluster_ind1, cluster_ind2 = find_cluster(distM)
+        cluster1 = expert_clusters[cluster_ind1]
+        cluster2 = expert_clusters[cluster_ind2]
+
+        cnew = combine(cluster1, cluster2)
+        expert_clusters = np.insert(np.delete(expert_clusters, [cluster_ind1, cluster_ind2]), 0, [cnew])
         distM = distance_matrix(expert_clusters)
 
-    print("Pause")  # temporary for breakpoint
-    pass
+        with open(comp_path, 'a') as f:
+            f.write("\n\n Iteration {}:".format(i + 1)
+                    + "\nNew cluster members: {}, {}".format(cluster1.allnames(), cluster2.allnames())
+                    + "\nNew cluster assessment: "
+                    + "\nCluster Members: " + ", ".join(cnew.names)
+                    + "\nCluster Mid: \n"
+                    + "\n".join(" \t\t".join(map(str, o)) for o in np.around(cnew.mid(), 3))
+                    + "\nNew Distance Matrix: \n"
+                    + "\n".join(" \t\t".join(map(str, o)) for o in np.around(distM, 3)))
+
+    with open(comp_path, 'a') as f:
+        f.write("\n\n FINAL CLUSTERS: \n"
+                + "\n".join("Cluster: " + str(cl.allnames())
+                            for cl in expert_clusters))
