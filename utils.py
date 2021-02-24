@@ -59,3 +59,7 @@ def find_cluster(matrix: np.ndarray) -> Tuple[int, int]:
     npcoord = np.unravel_index(flat_index, matrix.shape)
     coord = npcoord[0].take(0), npcoord[1].take(0)
     return coord
+
+
+def find_cluster_mediana(mediana: np.ndarray, ind : int) -> Tuple[int, int]:
+    return ind, np.nanargmin(mediana, axis=0).take(0)

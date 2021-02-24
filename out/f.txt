@@ -9,15 +9,15 @@ nan 		1.944 		2.156 		1.016 		1.152 		2.398 		0.928 		0.508 		1.672
 0.928 		1.596 		1.92 		0.772 		1.504 		1.886 		nan 		0.776 		1.372
 0.508 		2.142 		2.188 		1.292 		1.364 		2.486 		0.776 		nan 		1.87
 1.672 		0.708 		1.016 		1.068 		1.182 		1.698 		1.372 		1.87 		nan
-Distance SUMS: 
-[11.774 10.7   13.356  9.45  10.24  14.97  10.754 12.626 10.586]
-Mediana Index: 3
+Distance SUMS:
+11.774 		10.7 		13.356 		9.45 		10.24 		14.97 		10.754 		12.626 		10.586
+Mediana Index: 4
 Trust Radius: 0.296
 
  Iteration 1:
-New cluster members: ['0'], ['7']
+New cluster members: ['1'], ['8']
 New cluster assessment: 
-Cluster Members: 0, 7
+Cluster Members: 1, 8
 Cluster Mid: 
 0.691 		0.205 		0.104
 0.342 		0.488 		0.17
@@ -33,9 +33,9 @@ nan 		2.043 		2.157 		1.124 		1.258 		2.432 		0.851 		1.771
 1.771 		0.708 		1.016 		1.068 		1.182 		1.698 		1.372 		nan
 
  Iteration 2:
-New cluster members: ['1'], ['8']
+New cluster members: ['2'], ['9']
 New cluster assessment: 
-Cluster Members: 1, 8
+Cluster Members: 2, 9
 Cluster Mid: 
 0.288 		0.334 		0.378
 0.472 		0.232 		0.296
@@ -50,9 +50,9 @@ nan 		1.907 		0.963 		1.076 		1.078 		1.406 		1.484
 1.484 		0.851 		1.92 		0.772 		1.504 		1.886 		nan
 
  Iteration 3:
-New cluster members: ['3'], ['6']
+New cluster members: ['4'], ['7']
 New cluster assessment: 
-Cluster Members: 3, 6
+Cluster Members: 4, 7
 Cluster Mid: 
 0.395 		0.422 		0.182
 0.369 		0.462 		0.17
@@ -66,9 +66,9 @@ nan 		1.207 		0.877 		1.708 		1.188 		1.738
 1.738 		1.406 		2.432 		2.088 		1.544 		nan
 
  Iteration 4:
-New cluster members: ['3', '6'], ['0', '7']
+New cluster members: ['4', '7'], ['1', '8']
 New cluster assessment: 
-Cluster Members: 3, 6, 0, 7
+Cluster Members: 4, 7, 1, 8
 Cluster Mid: 
 0.543 		0.314 		0.143
 0.356 		0.475 		0.17
@@ -81,9 +81,9 @@ nan 		1.469 		1.93 		1.087 		2.074
 2.074 		1.406 		2.088 		1.544 		nan
 
  Iteration 5:
-New cluster members: ['1', '8'], ['2']
+New cluster members: ['2', '9'], ['3']
 New cluster assessment: 
-Cluster Members: 1, 8, 2
+Cluster Members: 2, 9, 3
 Cluster Mid: 
 0.322 		0.292 		0.386
 0.553 		0.221 		0.225
@@ -95,7 +95,7 @@ nan 		1.538 		1.217 		1.563
 1.563 		2.074 		1.544 		nan
 
  FINAL CLUSTERS: 
-Cluster: ['1', '8', '2']
-Cluster: ['3', '6', '0', '7']
-Cluster: ['4']
+Cluster: ['2', '9', '3']
+Cluster: ['4', '7', '1', '8']
 Cluster: ['5']
+Cluster: ['6']
