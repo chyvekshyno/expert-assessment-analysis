@@ -13,9 +13,11 @@ Distance SUMS:
 11.774 		10.7 		13.356 		9.45 		10.24 		14.97 		10.754 		12.626 		10.586
 Mediana Index: 4
 Trust Radius: 0.296
+Mediana Column:	4
 
  Iteration 1:
-Mediana min value ind:	7
+Mediana min value ind:	(7,4)
+Mediana min value:	0.772
 New cluster members: ['4'], ['7']
 New cluster assessment: 
 Cluster Members: 4, 7
@@ -34,10 +36,11 @@ nan 		0.847 		1.319 		1.708 		1.188 		1.738 		0.975 		1.095
 1.095 		1.672 		0.708 		1.016 		1.182 		1.698 		1.87 		nan
 Distance SUMS:
 8.87 		10.677 		9.297 		11.566 		8.992 		13.156 		11.533 		9.241
-Mediana Index:	1
+Mediana Column:	1
 
  Iteration 2:
-Mediana min value ind:	2
+Mediana min value ind:	(2,1)
+Mediana min value:	0.847
 New cluster members: ['4', '7'], ['1']
 New cluster assessment: 
 Cluster Members: 4, 7, 1
@@ -55,10 +58,11 @@ nan 		1.445 		1.857 		1.111 		1.943 		0.801 		1.221
 1.221 		0.708 		1.016 		1.182 		1.698 		1.87 		nan
 Distance SUMS:
 8.379 		7.479 		9.559 		7.763 		10.963 		10.851 		7.695
-Mediana Index:	2
+Mediana Column:	2
 
  Iteration 3:
-Mediana min value ind:	7
+Mediana min value ind:	(7,2)
+Mediana min value:	0.708
 New cluster members: ['2'], ['9']
 New cluster assessment: 
 Cluster Members: 2, 9
@@ -75,10 +79,11 @@ nan 		1.333 		0.963 		1.078 		1.406 		2.006
 2.006 		0.801 		2.188 		1.364 		2.486 		nan
 Distance SUMS:
 6.786 		7.045 		8.592 		6.593 		9.467 		8.845
-Mediana Index:	4
+Mediana Column:	4
 
  Iteration 4:
-Mediana min value ind:	1
+Mediana min value ind:	(1,4)
+Mediana min value:	1.078
 New cluster members: ['5'], ['2', '9']
 New cluster assessment: 
 Cluster Members: 5, 2, 9
@@ -94,10 +99,11 @@ nan 		1.169 		1.005 		1.413 		1.732
 1.732 		0.801 		2.188 		2.486 		nan
 Distance SUMS:
 5.319 		5.771 		7.139 		7.93 		7.207
-Mediana Index:	1
+Mediana Column:	1
 
  Iteration 5:
-Mediana min value ind:	3
+Mediana min value ind:	(3,1)
+Mediana min value:	1.005
 New cluster members: ['5', '2', '9'], ['3']
 New cluster assessment: 
 Cluster Members: 5, 2, 9, 3
@@ -112,7 +118,7 @@ nan 		1.293 		1.552 		1.82
 1.82 		0.801 		2.486 		nan
 Distance SUMS:
 4.664 		4.037 		5.981 		5.107
-Mediana Index:	2
+Mediana Column:	2
 
  FINAL CLUSTERS: 
 Cluster: ['5', '2', '9', '3']

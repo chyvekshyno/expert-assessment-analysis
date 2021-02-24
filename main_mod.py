@@ -74,13 +74,19 @@ if __name__ == '__main__':
                 + "\nMediana Index: "
                 + str(mediana_ind + 1)
                 + "\nTrust Radius: "
-                + str(round(trustRadius, 4)))
+                + str(round(trustRadius, 4))
+                + "\nMediana Column:\t" + str(mediana_ind + 1))
 
     # clustering
     for i in range(5):
         cluster_ind1, cluster_ind2 = find_cluster_mediana(distM[mediana_ind], mediana_ind)
         cluster1 = expert_clusters[cluster_ind1]
         cluster2 = expert_clusters[cluster_ind2]
+
+        with open(comp_path, 'a') as f:
+            f.write("\n\n Iteration {}:".format(i + 1)
+                    + "\nMediana min value ind:\t(" + str(cluster_ind2 + 1) + ',' + str(cluster_ind1 + 1) + ')'
+                    + "\nMediana min value:\t" + str(round(distM[cluster_ind1][cluster_ind2], 3)))
 
         cnew = combine(cluster1, cluster2)
         expert_clusters = np.insert(np.delete(expert_clusters, [cluster_ind1, cluster_ind2]), 0, [cnew])
@@ -89,9 +95,7 @@ if __name__ == '__main__':
         mediana_ind = argmediana(distM)
 
         with open(comp_path, 'a') as f:
-            f.write("\n\n Iteration {}:".format(i + 1)
-                    + "\nMediana min value ind:\t" + str(cluster_ind2 + 1)
-                    + "\nNew cluster members: {}, {}".format(cluster1.allnames(), cluster2.allnames())
+            f.write("\nNew cluster members: {}, {}".format(cluster1.allnames(), cluster2.allnames())
                     + "\nNew cluster assessment: "
                     + "\nCluster Members: " + ", ".join(cnew.names)
                     + "\nCluster Mid: \n"
@@ -100,7 +104,7 @@ if __name__ == '__main__':
                     + "\n".join(" \t\t".join(map(str, o)) for o in np.around(distM, 3))
                     + "\nDistance SUMS:\n" + " \t\t".join(str(o)
                                                           for o in np.around(distSUM, 3))
-                    + "\nMediana Index:\t" + str(mediana_ind + 1))
+                    + "\nMediana Column:\t" + str(mediana_ind + 1))
 
     with open(comp_path, 'a') as f:
         f.write("\n\n FINAL CLUSTERS: \n"
