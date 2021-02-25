@@ -16,10 +16,23 @@ def distance(cl1: npcluster, cl2: npcluster) -> float:
     return res
 
 
+def norm(table: np.ndarray) -> np.ndarray:
+    """
+    norm at axis=1
+    :param table: numpy array
+    :return: norm numpy array
+    """
+    res = table.copy()
+    for o in table:
+        array_sum = np.sum(o, axis=1)
+        o /= array_sum
+    return res
+
+
 def distance_matrix(morph_table: np.ndarray) -> np.ndarray:
     """
     calculate matrix if distances between clusters
-    :param morph_table: list of SimpleNPCluster s
+    :param morph_table: numpy array of SimpleNPCluster
     :return: np.array (dim=2)
     """
     mdim = len(morph_table)
@@ -50,7 +63,7 @@ def trust_radius(matrix: np.ndarray) -> int:
     mediana = matrix[argmediana(matrix)]
     trust_count = matrix.shape[0] // 2
     trust_ind = np.argsort(mediana)[:trust_count]
-    res = mediana[trust_ind[-1]] - mediana[trust_ind[0]]
+    res = mediana[trust_ind[-1]]
     return res
 
 
@@ -61,5 +74,5 @@ def find_cluster(matrix: np.ndarray) -> Tuple[int, int]:
     return coord
 
 
-def find_cluster_mediana(mediana: np.ndarray, ind : int) -> Tuple[int, int]:
+def find_cluster_mediana(mediana: np.ndarray, ind: int) -> Tuple[int, int]:
     return ind, np.nanargmin(mediana, axis=0).take(0)

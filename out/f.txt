@@ -12,7 +12,7 @@ nan 		1.944 		2.156 		1.016 		1.152 		2.398 		0.928 		0.508 		1.672
 Distance SUMS:
 11.774 		10.7 		13.356 		9.45 		10.24 		14.97 		10.754 		12.626 		10.586
 Mediana Index: 4
-Trust Radius: 0.296
+Trust Radius: 1.068
 
  Iteration 1:
 New cluster members: ['1'], ['8']
